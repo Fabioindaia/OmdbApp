@@ -73,11 +73,9 @@ public class FavoritoAdapter extends ExpandableRecyclerAdapter<Favorito, Item, F
         });
 
         FavoritoItemViewHolder.imgRemover.setOnClickListener((View v) -> {
-            final String tipo = listaFavorito.get(parentPosition).getTipo();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
             builder.setTitle("Confirmação")
-                    .setMessage("Tem certeza que deseja remover este " + tipo.toLowerCase() + " da lista de favoritos?")
+                    .setMessage("Tem certeza que deseja remover este item da lista de favoritos?")
                     .setPositiveButton("Remover", (DialogInterface dialog, int which) -> {
                         itemDao.removerFavorito(item.getId());
                         List<Item> listaItem = listaFavorito.get(parentPosition).getChildList();
