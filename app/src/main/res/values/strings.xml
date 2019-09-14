@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">OmdbApp</string>
+    <string name="app_name">Omdb App</string>
+    <string name="filmes_series_epis">Filmes, séries e episódios</string>
+    <string name="buscar_titulo">Buscar pelo título</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="texto_img_buscar">Imagem buscar</string>
+    <string name="mensagem_main">Você pode buscar por título e tipos de forma rápida.</string>
+    <string name="erro_qtd_caracteres_pesquisa">Informe no mínimo 4 caracteres para pesquisa</string>
+    <string name="erro_ws_registro_nao_encontrado">Registro não encontrado</string>
+    <string name="erro_ws_sem_conexao">Sem conexão</string>
+    <string name="ficha_tecnica">Ficha técnica</string>
+    <string name="lbl_ano_producao">Ano produção:</string>
+    <string name="lbl_dirigido_por">Dirigido por:</string>
+    <string name="lbl_estreia">Estreia:</string>
+    <string name="lbl_duracao">Duração:</string>
+    <string name="lbl_genero">Gênero:</string>
+    <string name="lbl_idioma">Idioma:</string>
+    <string name="lbl_elenco">Elenco:</string>
+    <string name="sinopse">Sinopse</string>
+
+    <!--- Array -->
+    <string-array name="tipo">
+        <item>Filmes</item>
+        <item>Séries</item>
+        <item>Episódios</item>
+    </string-array>
 </resources>
