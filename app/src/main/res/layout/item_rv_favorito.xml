@@ -26,14 +26,16 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toBottomOf="@+id/imgExpandir"
             app:layout_constraintEnd_toStartOf="@+id/imgExpandir"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgExpandir" />
 
         <ImageView
             android:id="@+id/imgExpandir"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            style="@style/MyIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"

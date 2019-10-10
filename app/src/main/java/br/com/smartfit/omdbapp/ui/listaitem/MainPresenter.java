@@ -9,7 +9,7 @@ import java.util.List;
 import br.com.smartfit.omdbapp.R;
 import br.com.smartfit.omdbapp.model.ReturnData;
 import br.com.smartfit.omdbapp.network.RetrofitConfig;
-import br.com.smartfit.omdbapp.sqlite.ItemDao;
+import br.com.smartfit.omdbapp.realm.ItemDao;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,9 +36,9 @@ public class MainPresenter extends RetrofitConfig implements MainContrato.Presen
      */
     @Override
     public void carregarSugestaoPesquisa(MaterialSearchBar toolbar_pesquisar) {
-        List<String> listSugestao = itemDao.retornarSugestaoPesquisa();
-        if (listSugestao.size()>0){
-            toolbar_pesquisar.setLastSuggestions(listSugestao);
+        List<String> listaSugestao = itemDao.retornarSugestaoPesquisa();
+        if (listaSugestao.size()>0){
+            toolbar_pesquisar.setLastSuggestions(listaSugestao);
         }
     }
 

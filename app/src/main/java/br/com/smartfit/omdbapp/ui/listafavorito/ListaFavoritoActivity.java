@@ -17,11 +17,13 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import br.com.smartfit.omdbapp.R;
 import br.com.smartfit.omdbapp.model.Favorito;
-import br.com.smartfit.omdbapp.sqlite.ItemDao;
+import br.com.smartfit.omdbapp.realm.ItemDao;
 import br.com.smartfit.omdbapp.ui.detalhesitem.DetalhesItemActivity;
+import io.realm.Realm;
 
 public class ListaFavoritoActivity extends AppCompatActivity implements ListaFavoritoContrato.View {
 
@@ -70,8 +72,7 @@ public class ListaFavoritoActivity extends AppCompatActivity implements ListaFav
         }
 
         setRecyclerViewItem();
-        ListaFavoritoPresenter presenter = new ListaFavoritoPresenter(this,
-                new ItemDao(getApplicationContext()));
+        ListaFavoritoPresenter presenter = new ListaFavoritoPresenter(this, new ItemDao(Realm.getInstance(Objects.requireNonNull(Realm.getDefaultConfiguration()))));
         presenter.buscarDados();
     }
 
@@ -83,7 +84,8 @@ public class ListaFavoritoActivity extends AppCompatActivity implements ListaFav
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvFavorito.setLayoutManager(linearLayoutManager);
         rvFavorito.setHasFixedSize(true);
-        favoritoAdapter = new FavoritoAdapter(listaFavorito, this, new ItemDao(getApplicationContext()));
+
+        favoritoAdapter = new FavoritoAdapter(listaFavorito, this, new ItemDao(Realm.getInstance(Objects.requireNonNull(Realm.getDefaultConfiguration()))));
         rvFavorito.setAdapter(favoritoAdapter);
     }
 

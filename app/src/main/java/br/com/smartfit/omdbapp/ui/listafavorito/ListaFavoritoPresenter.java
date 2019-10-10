@@ -1,6 +1,6 @@
 package br.com.smartfit.omdbapp.ui.listafavorito;
 
-import br.com.smartfit.omdbapp.sqlite.ItemDao;
+import br.com.smartfit.omdbapp.realm.ItemDao;
 
 public class ListaFavoritoPresenter implements ListaFavoritoContrato.Presenter {
 
@@ -11,7 +11,6 @@ public class ListaFavoritoPresenter implements ListaFavoritoContrato.Presenter {
         this.view = view;
         this.itemDao = itemDao;
     }
-
 
     /**
      * Faz a chamada para carregar os dados do banco SQLite

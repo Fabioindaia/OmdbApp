@@ -1,8 +1,6 @@
 package br.com.smartfit.omdbapp.ui.listaitem;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,13 +22,15 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import br.com.smartfit.omdbapp.R;
 import br.com.smartfit.omdbapp.model.Item;
-import br.com.smartfit.omdbapp.sqlite.ItemDao;
+import br.com.smartfit.omdbapp.realm.ItemDao;
 import br.com.smartfit.omdbapp.ui.detalhesitem.DetalhesItemActivity;
 import br.com.smartfit.omdbapp.ui.listafavorito.ListaFavoritoActivity;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity implements MainContrato.View, MaterialSearchBar.OnSearchActionListener {
 
@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     private List<Item> listaItem = new ArrayList<>();
     private ItemAdapter itemAdapter;
     private LinearLayoutManager linearLayoutManager;
-    private SQLiteDatabase bd;
     private String titulo = "", tipo;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
     protected void onDestroy() {
         super.onDestroy();
         presenter.inserirSugestaoPesquisa(toolbar_pesquisar);
-        bd.close();
+        realm.close();
     }
 
     /**
@@ -110,13 +110,14 @@ public class MainActivity extends AppCompatActivity implements MainContrato.View
         constraintLayoutMensagem = findViewById(R.id.constraintLayoutMensagem);
 
         ButterKnife.bind(this);
-        bd = openOrCreateDatabase("OmbdApp.db", Context.MODE_PRIVATE, null);
+        Realm.init(getApplicationContext());
+        realm = Realm.getInstance(Objects.requireNonNull(Realm.getDefaultConfiguration()));
         toolbar_pesquisar.setOnSearchActionListener(this);
         toolbar_pesquisar.inflateMenu(R.menu.menu_toolbar_pesquisar);
 
         setSpinnerTipo();
         setRecyclerViewItem();
-        presenter = new MainPresenter(this, new ItemDao(getApplicationContext()), itemAdapter);
+        presenter = new MainPresenter(this, new ItemDao(realm), itemAdapter);
         presenter.carregarSugestaoPesquisa(toolbar_pesquisar);
     }
 

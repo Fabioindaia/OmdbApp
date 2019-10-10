@@ -22,7 +22,7 @@ import java.util.List;
 import br.com.smartfit.omdbapp.R;
 import br.com.smartfit.omdbapp.model.Favorito;
 import br.com.smartfit.omdbapp.model.Item;
-import br.com.smartfit.omdbapp.sqlite.ItemDao;
+import br.com.smartfit.omdbapp.realm.ItemDao;
 
 public class FavoritoAdapter extends ExpandableRecyclerAdapter<Favorito, Item, FavoritoAdapter.FavoritoViewHolder, FavoritoAdapter.FavoritoItemViewHolder> {
 
@@ -60,10 +60,14 @@ public class FavoritoAdapter extends ExpandableRecyclerAdapter<Favorito, Item, F
 
     @Override
     public void onBindChildViewHolder(@NonNull FavoritoItemViewHolder FavoritoItemViewHolder, int parentPosition, int childPosition, @NonNull Item item) {
-        if (item.getImagem().equals("N/A")){
+        if (item.getImagem() != null) {
+            if (item.getImagem().equals("N/A")) {
+                FavoritoItemViewHolder.imgFoto.setImageResource(R.drawable.img_sem_foto);
+            } else {
+                FavoritoItemViewHolder.imgFoto.setImageURI(item.getImagem());
+            }
+        }else{
             FavoritoItemViewHolder.imgFoto.setImageResource(R.drawable.img_sem_foto);
-        }else {
-            FavoritoItemViewHolder.imgFoto.setImageURI(item.getImagem());
         }
         FavoritoItemViewHolder.txtTitulo.setText(item.getTitulo());
 

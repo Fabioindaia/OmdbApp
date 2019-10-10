@@ -79,10 +79,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         public void onBind(int position) {
             super.onBind(position);
             Item item = listaItem.get(position);
-            if (item.getImagem().equals("N/A")){
-                imgFoto.setImageResource(R.drawable.img_sem_foto);
+            if (item.getImagem() != null) {
+                if (item.getImagem().equals("N/A")) {
+                    imgFoto.setImageResource(R.drawable.img_sem_foto);
+                } else {
+                    imgFoto.setImageURI(item.getImagem());
+                }
             }else {
-                imgFoto.setImageURI(item.getImagem());
+                imgFoto.setImageResource(R.drawable.img_sem_foto);
             }
             txtTitulo.setText(item.getTitulo());
 
